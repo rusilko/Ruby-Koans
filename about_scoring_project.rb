@@ -31,6 +31,13 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 def score(dice)
   # You need to write this method
+  d = dice.map {|x| x==1 ? 10 : x}
+  result = 0
+  [10,2,3,4,5,6].each do |x|
+    result += x * 100 if d.count(x) >= 3
+    result += d.count(x) % 3 * x * 10 if [10,5].include?(x) 
+  end
+  result  
 end
 
 class AboutScoringProject < EdgeCase::Koan
